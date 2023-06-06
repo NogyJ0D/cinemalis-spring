@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movies")
@@ -19,4 +20,10 @@ public class MovieController {
 
     @PostMapping("/")
     public void createMovie(@RequestBody Movie movie) {movieService.createMovie(movie);}
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Optional<Movie>> getById(@PathVariable Long id){return ResponseEntity.ok(movieService.findById(id));}
+
+    @RequestMapping(value = "/max/rating", method = RequestMethod.GET)
+    public ResponseEntity<Movie> getMaxRating(){return ResponseEntity.ok(movieService.findMaxRating());}
 }
