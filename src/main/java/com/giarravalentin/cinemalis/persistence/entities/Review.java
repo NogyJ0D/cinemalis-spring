@@ -11,31 +11,31 @@ import java.util.Date;
 @Table(name = "reviews")
 public class Review {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long reviewId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private User user;
-    @Column(nullable = false, columnDefinition = "varchar(400)")
+    @Column(nullable = false, columnDefinition = "varchar(512)")
     private String text;
     @Column(precision = 1)
     private float rating = 0f;
     @ManyToOne
-    @JoinColumn(name = "movie_id", referencedColumnName = "movie_id", nullable = false)
+    @JoinColumn(referencedColumnName = "id", nullable = false)
     private Movie movie;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(updatable = false)
     @CreationTimestamp
-    private Date createdAt;
+    private Date created_at;
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_at;
 
-    public Long getReviewId() {
-        return reviewId;
+    public Long getId() {
+        return id;
     }
 
-    public void setReviewId(Long reviewId) {
-        this.reviewId = reviewId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public User getUser() {
@@ -66,23 +66,23 @@ public class Review {
         return movie;
     }
 
-    public void setMovie(Movie movieId) {
-        this.movie = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated_at(LocalDateTime updated_at) {
+        this.updated_at = updated_at;
     }
 }

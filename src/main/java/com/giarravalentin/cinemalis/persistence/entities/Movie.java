@@ -7,14 +7,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "movies")
 public class Movie {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "movie_id")
-    private Long movieId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     @Column(columnDefinition = "varchar(60)", nullable = false)
     private String name; // Nombre de la película
     @Column(columnDefinition = "varchar(300)")
@@ -24,24 +25,24 @@ public class Movie {
     @Column(precision = 1)
     private float rating; // de 0.0 a 5.0
     @Column
-    private String banner; // URL de la imagen grande
+    private String banner; // URL de la imagen horizontal
     @Column
-    private String poster; // URL del poster
+    private String poster; // URL del poster vertical
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(referencedColumnName = "id")
     private User user;
     @Column(updatable = false)
     @CreationTimestamp
-    private Date createdAt;
+    private Date created_at;
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_at;
 
-    public Long getMovieId() {
-        return movieId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -100,19 +101,19 @@ public class Movie {
         this.user = user;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setcreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated_at(LocalDateTime updated_at) {
+        this.updated_at = updated_at;
     }
 }
